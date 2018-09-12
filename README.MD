@@ -2,7 +2,7 @@
 
 #### Import(引入)
 ```html
-<script src="./dist/js-qsnark-sdk.js"></script>
+<script src="./api/api.js"></script>
 ```
 #### Usage(使用)
 ```js
