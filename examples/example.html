@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Hyperchain javascript sdk - example</title>
+    <script src="../api/api.js"></script>
+</head>
+
+<body>
+    <script>
+        const config = {
+            phone: '<phone>',
+            password: "<password>",
+            apiKey: "<apiKey>",
+            apiSecret: "<apiSecret>"
+        }
+        var sdk = new SDK(function(token){
+            console.log(sdk.getAccessToken())
+            // sdk.refreshApiToken(function(token) {
+            //     console.log(sdk.getAccessToken())
+            // });
+            sdk.createAccount(function(data){
+                console.log(data)
+            });
+            sdk.queryBlock("number", "latest", function(data) {
+                console.log(data);
+            });
+            sdk.queryBlocks("1", "3", function(data) {
+                console.log(data);
+            });
+            sdk.queryBlocksByRange("2", "4", function(data) {
+                console.log(data);
+            });
+            sdk.queryTransactionCount(function(data) {
+                console.log(data);
+            });
+            sdk.queryTransactionByHash("0xed70377c261bfdc7dd7f4fc15c8961c145f9457186d6ff95f60907e9fb63d827", function(data){
+                    console.log(data);
+            });
+            sdk.queryTransactionReceipt("0xed70377c261bfdc7dd7f4fc15c8961c145f9457186d6ff95f60907e9fb63d827", function(data) {
+                    console.log(data);
+            });
+            sdk.queryDiscardTransaction("1515140350903604865", "1515140350903604867", function(data) {
+                console.log(data);
+            });
+            sdk.compileContract("contract test{}", function(data) {
+                console.log(data);
+            });
+            sdk.deployContract("0x60606040523415600e57600080fd5b5b603680601c6000396000f30060606040525b600080fd00a165627a7a72305820b4c36b8b61723f302432d246407a061599017f8607ed26f1c053b5ecc63a54200029","0x3713c3d01ae09cf32787c9c66c9c0781cf4b613d", function(data) {
+                console.log(data);
+            });
+            sdk.deployContractSync("0x60606040523415600e57600080fd5b5b603680601c6000396000f30060606040525b600080fd00a165627a7a72305820b4c36b8b61723f302432d246407a061599017f8607ed26f1c053b5ecc63a54200029","0x3713c3d01ae09cf32787c9c66c9c0781cf4b613d", function(data) {
+                console.log(data);
+            });
+            var abi = "[{\"constant\":false,\"inputs\":[{\"name\":\"num1\",\"type\":\"uint32\"},{\"name\":\"num2\",\"type\":\"uint32\"}],\"name\":\"add\",\"outputs\":[],\"payable\":false,\"type\":\"function\"},{\"constant\":false,\"inputs\":[],\"name\":\"getSum\",\"outputs\":[{\"name\":\"\",\"type\":\"uint32\"}],\"payable\":false,\"type\":\"function\"},{\"constant\":false,\"inputs\":[],\"name\":\"increment\",\"outputs\":[],\"payable\":false,\"type\":\"function\"}]"
+            var args = ["1","2"]
+            var func = "add"
+            sdk.getPayload(abi, func, args, function(data) {
+                console.log(data);
+            });
+
+            var _const =  false;
+            var _from = "0x3713c3d01ae09cf32787c9c66c9c0781cf4b613d";
+            var _payload = "34141";
+            var _to = "0x8255340c2c4a1aec4010d2b6fdbb98727c65523d";
+            sdk.invokeContract(_const, _from, _to, _payload, function(data) {
+                console.log(data);
+            });
+            sdk.invokeContractSync(_const, _from, _to, _payload, function(data) {
+                console.log(data);
+            });
+
+            var _from = "0x19a170a0413096a9b18f2ca4066faa127f4d6f4a";
+            var _operation = 1;
+            var _payload = "0x60606040523415600e57600080fd5b5b603680601c6000396000f30060606040525b600080fd00a165627a7a72305820b4c36b8b61723f302432d246407a061599017f8607ed26f1c053b5ecc63a54200029";
+            var _to = "0xd3a7bdd391f6aa13b28a72690e19d2ab3d845ac8";
+            sdk.maintainContract(_from, _to, _operation, _payload, function(data) {
+                console.log(data);
+            });
+            sdk.queryContractStatus("0xd3a7bdd391f6aa13b28a72690e19d2ab3d845ac8", function(data) {
+                console.log(data);
+            });
+        });
+        // var sdk = new SDK(function(){
+        //     console.log(sdk.getAccessToken())
+        // }, config.phone,config.password,config.apiKey,config.apiSecret);
+    </script>
+</body>
+
+</html>
